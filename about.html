@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صيدلية عزت | عن الصيدلية</title>
+    <meta name="description" content="تعرف على صيدلية عزت بإدارة دكتور عزت فؤاد أبوسنان في أم دومة ومهمتنا في الرعاية الصحية.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            green: '#059669',
+                            dark: '#047857',
+                            light: '#ecfdf5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-medical-light text-medical-green p-2 rounded-lg">
+                    <i class="fa-solid fa-staff-snake text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 leading-none">صيدلية عزت</h1>
+                    <p class="text-sm text-gray-500">د. عزت فؤاد أبوسنان</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a href="index.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الرئيسية</a>
+                <a href="products.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الأجهزة الطبية</a>
+                <a href="services.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الخدمات</a>
+                <a href="about.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">عن الصيدلية</a>
+                <a href="contact.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">اتصل بنا</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-600 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 flex flex-col p-4 gap-4 shadow-lg absolute w-full">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الرئيسية</a>
+            <a href="products.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الأجهزة الطبية</a>
+            <a href="services.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الخدمات</a>
+            <a href="about.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">عن الصيدلية</a>
+            <a href="contact.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">اتصل بنا</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="bg-medical-green text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">عن الصيدلية</h1>
+            <p class="text-green-100 text-lg">من نحن، ومهمتنا في تقديم رعاية صحية أفضل لمجتمعنا</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <main class="flex-grow py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">الدكتور <span class="text-medical-green">عزت فؤاد أبوسنان</span></h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        تأسست صيدلية عزت لتقديم أسمى معايير الرعاية الصحية لمجتمع أم دومة ومركز طما. بإشراف الدكتور عزت فؤاد أبوسنان، نلتزم بتوفير الأدوية الموثوقة، والاستشارات الطبية الأمينة، والأجهزة الطبية عالية الجودة.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        نحن لسنا مجرد نقطة بيع للأدوية، بل نحن شركاء في رحلة علاجك وصحتك. نضع صحة المريض دائمًا في المقام الأول، ونحرص على التوعية الدائمة بأساليب الحياة الصحية.
+                    </p>
+                </div>
+                <!-- Stylish Placeholder Graphic Since Real Photo Not Provided -->
+                <div class="bg-medical-light rounded-3xl p-10 flex flex-col items-center justify-center medical-shadow text-center">
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 medical-shadow">
+                        <i class="fa-solid fa-user-doctor text-6xl text-medical-green"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">د. عزت فؤاد أبوسنان</h3>
+                    <p class="text-gray-500">مالك ومدير الصيدلية</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3">رؤيتنا ومهمتنا</h2>
+                    <div class="w-24 h-1 bg-medical-green mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-2xl medical-shadow border-t-4 border-medical-green">
+                        <div class="flex items-center gap-4 mb-4">
+                            <i class="fa-solid fa-eye text-3xl text-medical-green"></i>
+                            <h3 class="text-xl font-bold text-gray-900">الرؤية</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            أن نكون الصيدلية الرائدة والوجهة الطبية الأولى والأكثر ثقة في أم دومة ومحافظة سوهاج، عبر تقديم خدمات متكاملة ومتميزة ترتقي بحياة الأفراد وصحتهم.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl medical-shadow border-t-4 border-medical-green">
+                        <div class="flex items-center gap-4 mb-4">
+                            <i class="fa-solid fa-bullseye text-3xl text-medical-green"></i>
+                            <h3 class="text-xl font-bold text-gray-900">المهمة</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            توفير الرعاية الصيدلانية على مدار الساعة لتلبية احتياجات المجتمع من أدوية ومستلزمات طبية، مع تقديم نصائح طبية موثوقة والمساهمة في التثقيف الصحي للجميع.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-800 pb-10 max-w-6xl mx-auto">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-medical-dark text-white p-2 rounded-lg">
+                            <i class="fa-solid fa-staff-snake text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white leading-none">صيدلية عزت</h2>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        نقدم لك الرعاية الطبية التي تستحقها، وجهتك الأولى للصحة والجمال في أم دومة.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">روابط سريعة</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الرئيسية</a></li>
+                        <li><a href="products.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الأجهزة الطبية</a></li>
+                        <li><a href="services.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الخدمات</a></li>
+                        <li><a href="about.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> عن الصيدلية</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">تواصل معنا</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-medical-green"></i>
+                            <span>أم دومة – مركز طما – محافظة سوهاج – مصر</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-medical-green"></i>
+                            <a href="https://wa.me/201001816929" dir="ltr" class="hover:text-white transition">+20 100 181 6929</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-8 text-sm text-gray-500">
+                <p>&copy; 2026 صيدلية عزت. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201001816929" class="whatsapp-float" target="_blank" title="تواصل معنا عبر واتساب">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

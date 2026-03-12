@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+html, body {
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    text-align: right;
+    scroll-behavior: smooth;
+}
+
+.medical-green {
+    color: #059669; /* Tailwind green-600 */
+}
+.bg-medical-green {
+    background-color: #059669; /* Tailwind green-600 */
+}
+.bg-medical-green:hover {
+    background-color: #047857; /* Tailwind green-700 */
+}
+.medical-green-light {
+    background-color: #ecfdf5; /* Tailwind emerald-50 */
+}
+.medical-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+.hover-medical-shadow:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    left: 40px; /* Left on RTL for non-obstruction */
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #20b858;
+    transform: scale(1.1);
+    color: #FFF;
+}

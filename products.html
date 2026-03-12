@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صيدلية عزت | الأجهزة الطبية</title>
+    <meta name="description" content="تصفح واطلب أحدث الأجهزة الطبية من صيدلية عزت. أجهزة ضغط، سكر، وغيرها بأفضل الأسعار.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            green: '#059669',
+                            dark: '#047857',
+                            light: '#ecfdf5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo Section -->
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-medical-light text-medical-green p-2 rounded-lg">
+                    <i class="fa-solid fa-staff-snake text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 leading-none">صيدلية عزت</h1>
+                    <p class="text-sm text-gray-500">د. عزت فؤاد أبوسنان</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex gap-6 items-center">
+                <a href="index.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الرئيسية</a>
+                <a href="products.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الأجهزة الطبية</a>
+                <a href="services.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الخدمات</a>
+                <a href="about.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">عن الصيدلية</a>
+                <a href="contact.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">اتصل بنا</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-600 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 flex flex-col p-4 gap-4 shadow-lg absolute w-full">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الرئيسية</a>
+            <a href="products.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الأجهزة الطبية</a>
+            <a href="services.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الخدمات</a>
+            <a href="about.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">عن الصيدلية</a>
+            <a href="contact.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">اتصل بنا</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="bg-medical-green text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">قسم الأدوية والأجهزة الطبية</h1>
+            <p class="text-green-100 text-lg">تصفح أحدث الأجهزة الطبية واطلبها مباشرة عبر واتساب</p>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <main class="flex-grow py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Product 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-droplet text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز قياس السكر بشريط</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">كليفر تشيك (Clever Chek)</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">جهاز دقيق وسريع لقياس نسبة السكر في الدم بالمنزل مع سهولة الاستخدام للمرضى وكبار السن.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (جهاز قياس السكر كليفر تشيك) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-heart-pulse text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز قياس ضغط الدم</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">روسماكس (Rossmax)</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">جهاز آلي لقياس ضغط الدم بدقة عالية والنبض، موثوق ومناسب للاستخدام المنزلي واليومي.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (جهاز قياس الضغط روسماكس) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-temperature-half text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">ترمومتر رقمي (مقياس حرارة)</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">Thermometer</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">ترمومتر ديجيتال دقيق وسريع لقياس درجة حرارة الجسم للكبار والأطفال مع شاشة واضحة.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (ترمومتر رقمي) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-mask-ventilator text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز استنشاق البخار</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">نيبولايزر (Nebulizer)</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">جهاز فعّال لعلاج أزمات الربو والجهاز التنفسي وتحويل الدواء السائل إلى رذاذ للاستنشاق.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (جهاز استنشاق البخار نيبولايزر) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-lungs text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز قياس أكسجين الدم</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">Pulse Oximeter</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">مقياس صغير يُوضع في الإصبع لمتابعة نسبة الأكسجين في الدم ومعدل ضربات القلب بدقة.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (جهاز قياس أكسجين الدم) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center flex flex-col h-full">
+                    <div class="bg-gray-50 h-56 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition p-4">
+                         <i class="fa-solid fa-scale-balanced text-6xl text-gray-400 group-hover:text-medical-green transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">ميزان وزن رقمي</h3>
+                    <p class="text-gray-500 mb-4 text-sm font-medium">Digital Scale</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">ميزان حمام رقمي دقيق لمتابعة الوزن بانتظام، مزود بشاشة إلكترونية واضحة وتصميم عصري.</p>
+                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب هذا المنتج (ميزان وزن رقمي) من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-green text-white font-bold hover:bg-medical-dark shadow-md transition">
+                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب عبر واتساب
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-800 pb-10 max-w-6xl mx-auto">
+                <!-- Branding -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-medical-dark text-white p-2 rounded-lg">
+                            <i class="fa-solid fa-staff-snake text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white leading-none">صيدلية عزت</h2>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        نقدم لك الرعاية الطبية التي تستحقها، وجهتك الأولى للصحة والجمال في أم دومة.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">روابط سريعة</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الرئيسية</a></li>
+                        <li><a href="products.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الأجهزة الطبية</a></li>
+                        <li><a href="services.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> الخدمات</a></li>
+                        <li><a href="about.html" class="hover:text-medical-green transition"><i class="fa-solid fa-angle-left mr-2 text-sm"></i> عن الصيدلية</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">تواصل معنا</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-medical-green"></i>
+                            <span>أم دومة – مركز طما – محافظة سوهاج – مصر</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-medical-green"></i>
+                            <a href="https://wa.me/201001816929" dir="ltr" class="hover:text-white transition">+20 100 181 6929</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 text-sm text-gray-500">
+                <p>&copy; 2026 صيدلية عزت. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201001816929" class="whatsapp-float" target="_blank" title="تواصل معنا عبر واتساب">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
