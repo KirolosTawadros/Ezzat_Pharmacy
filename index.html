@@ -50,6 +50,11 @@
                 <a href="services.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الخدمات</a>
                 <a href="about.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">عن الصيدلية</a>
                 <a href="contact.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">اتصل بنا</a>
+                <!-- Cart Icon -->
+                <a href="checkout.html" class="relative text-gray-600 hover:text-medical-green transition flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 hover:bg-medical-light mr-2">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span class="cart-badge hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+                </a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -65,6 +70,10 @@
             <a href="services.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الخدمات</a>
             <a href="about.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">عن الصيدلية</a>
             <a href="contact.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">اتصل بنا</a>
+            <a href="checkout.html" class="nav-link text-medical-green font-bold flex items-center gap-2 border-t border-gray-100 pt-3 mt-1">
+                <i class="fa-solid fa-cart-shopping"></i> سلة المشتريات
+                <span class="cart-badge hidden bg-red-500 text-white text-xs px-2 py-0.5 rounded-full mr-auto">0</span>
+            </a>
         </nav>
     </header>
 
@@ -105,42 +114,8 @@
                 <p class="text-gray-600">اطلب الآن أحدث الأجهزة الطبية بأسعار تنافسية</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Product Card 1 -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center">
-                    <div class="bg-gray-50 h-48 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition">
-                         <i class="fa-solid fa-droplet text-5xl text-gray-400 group-hover:text-medical-green transition"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز قياس السكر</h3>
-                    <p class="text-gray-500 mb-6 text-sm">كليفر تشيك الدم (Clever Chek)</p>
-                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب جهاز قياس السكر كليفر تشيك من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-light text-medical-green font-bold hover:bg-medical-green hover:text-white transition">
-                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب الآن
-                    </a>
-                </div>
-
-                <!-- Product Card 2 -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center">
-                    <div class="bg-gray-50 h-48 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition">
-                         <i class="fa-solid fa-heart-pulse text-5xl text-gray-400 group-hover:text-medical-green transition"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">جهاز قياس الضغط</h3>
-                    <p class="text-gray-500 mb-6 text-sm">روسماكس (Rossmax)</p>
-                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب جهاز قياس الضغط روسماكس من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-light text-medical-green font-bold hover:bg-medical-green hover:text-white transition">
-                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب الآن
-                    </a>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 medical-shadow hover-medical-shadow transition-all group text-center">
-                    <div class="bg-gray-50 h-48 rounded-xl flex items-center justify-center mb-6 group-hover:bg-medical-light transition">
-                         <i class="fa-solid fa-temperature-half text-5xl text-gray-400 group-hover:text-medical-green transition"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">ترمومتر رقمي</h3>
-                    <p class="text-gray-500 mb-6 text-sm">قياس دقيق وسريع لدرجة الحرارة</p>
-                    <a href="https://wa.me/201001816929?text=مرحبًا، أريد طلب ترمومتر رقمي من صيدلية عزت." target="_blank" class="block w-full py-3 rounded-xl bg-medical-light text-medical-green font-bold hover:bg-medical-green hover:text-white transition">
-                        <i class="fa-brands fa-whatsapp ml-2"></i> اطلب الآن
-                    </a>
-                </div>
+            <div id="featured-products-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Products will be loaded here via JS -->
             </div>
             
             <div class="text-center mt-10">
@@ -256,6 +231,10 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/products.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

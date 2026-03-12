@@ -23,4 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // --- Dynamic Settings Update (WhatsApp Link Override) ---
+    if (typeof getSettings === 'function') {
+        const settings = getSettings();
+        document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+            const currentHref = link.getAttribute('href');
+            const newHref = currentHref.replace(/wa\.me\/\d+/, `wa.me/${settings.whatsapp}`);
+            link.setAttribute('href', newHref);
+        });
+    }
 });
