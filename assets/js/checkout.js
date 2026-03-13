@@ -66,20 +66,28 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 
                 // SAVE ORDER TO LOCAL DB FOR ADMIN PANEL TO SEE
-                saveOrderLocal(name, phone, address, paymentMethod, orderSummary, total);
+                const orderId = saveOrderLocal(name, phone, address, paymentMethod, orderSummary, total);
 
                 document.getElementById('loading-overlay').classList.add('hidden');
                 
-                // Alert Sucess & Redirect
-                alert(`تم استلام طلبك بنجاح يا ${name}! 
-                \nتفاصيل الطلب:
-                \n${orderSummary}\nالإجمالي: ${total} ج.م
-                \nسيتم التواصل معك عبر ${phone} قريبًا.`);
+                // Show Success Modal
+                document.getElementById('success-name').textContent = name;
+                document.getElementById('success-order-id').textContent = orderId;
+                document.getElementById('success-total').textContent = total;
+                
+                const modal = document.getElementById('success-modal');
+                const modalContent = document.getElementById('success-modal-content');
+                modal.classList.remove('hidden');
+                
+                // Small delay to trigger CSS transition
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
                 
                 // Clear Cart
                 cart = [];
                 saveCart();
-                window.location.href = "index.html";
             }, 1500);
         });
     }
@@ -136,8 +144,9 @@ function renderCartItems() {
 
 function saveOrderLocal(name, phone, address, payment, summary, total) {
     let orders = JSON.parse(localStorage.getItem('ezzat_orders')) || [];
+    const orderId = "ORD-" + Math.floor(Math.random() * 100000);
     orders.push({
-        id: "ORD-" + Math.floor(Math.random() * 100000),
+        id: orderId,
         date: new Date().toISOString(),
         customer_name: name,
         customer_phone: phone,
@@ -148,4 +157,9 @@ function saveOrderLocal(name, phone, address, payment, summary, total) {
         status: "Pending" // "Pending", "Confirmed", "Delivered"
     });
     localStorage.setItem('ezzat_orders', JSON.stringify(orders));
+    return orderId;
+}
+
+function closeSuccessModal() {
+    window.location.href = "index.html";
 }
