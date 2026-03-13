@@ -43,6 +43,7 @@
                     <p class="text-sm text-gray-500">د. عزت فؤاد أبوسنان</p>
                 </div>
             </a>
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex gap-6 items-center">
                 <a href="index.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الرئيسية</a>
                 <a href="products.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الأجهزة الطبية</a>
@@ -55,9 +56,17 @@
                     <span class="cart-badge hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
                 </a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-600 focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            
+            <!-- Mobile Menu Button & Cart -->
+            <div class="flex items-center gap-3 md:hidden">
+                <a href="checkout.html" class="relative text-medical-green transition flex items-center justify-center w-10 h-10 rounded-full bg-medical-light">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span class="cart-badge hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+                </a>
+                <button id="mobile-menu-button" class="text-2xl text-gray-600 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
         <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 flex flex-col p-4 gap-4 shadow-lg absolute w-full">
             <a href="index.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الرئيسية</a>
