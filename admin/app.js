@@ -135,7 +135,34 @@ function showOrderDetails(index) {
     let orders = JSON.parse(localStorage.getItem('ezzat_orders')) || [];
     orders.sort((a,b) => new Date(b.date) - new Date(a.date));
     const o = orders[index];
-    alert(`ملخص الطلب:\n${o.summary.replace(/\\n/g, '\n')}\nالعنوان:\n${o.address}`);
+    
+    // Populate Modal
+    document.getElementById('modal-order-id').textContent = o.id;
+    document.getElementById('modal-order-name').textContent = o.customer_name;
+    document.getElementById('modal-order-phone').textContent = o.customer_phone;
+    document.getElementById('modal-order-address').textContent = o.address;
+    document.getElementById('modal-order-summary').textContent = o.summary;
+    
+    let paymentText = o.payment_method === 'Cash' ? 'كاش (عند الاستلام)' : o.payment_method === 'InstaPay' ? 'انستاباي' : 'أونلاين (بطاقة ائتمان)';
+    document.getElementById('modal-order-payment').textContent = paymentText;
+    
+    document.getElementById('modal-order-total').textContent = o.total;
+
+    // Prepare WhatsApp Message Link
+    // Format the phone number (remove leading 0 and add +20 if needed, assuming Egypt numbers for now)
+    let formattedPhone = o.customer_phone;
+    if(formattedPhone.startsWith('0')) {
+        formattedPhone = '20' + formattedPhone.substring(1);
+    }
+    const waText = encodeURIComponent(`أهلاً بك يا ${o.customer_name}، نتواصل معك من صيدلية عزت بخصوص طلبك رقم ${o.id}...`);
+    document.getElementById('modal-order-whatsapp-btn').href = `https://wa.me/${formattedPhone}?text=${waText}`;
+
+    // Show Modal
+    document.getElementById('order-modal').classList.remove('hidden');
+}
+
+function closeOrderModal() {
+    document.getElementById('order-modal').classList.add('hidden');
 }
 
 function deleteOrder(index) {
