@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+<<<<<<< HEAD
     // ─── Global Cart Badge ────────────────────────────────────────────────────
     updateCartBadge();
 
@@ -38,6 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 authNav.innerHTML += `<a href="admin/dashboard.html" class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium hover:bg-purple-200 transition">لوحة التحكم</a>`;
             }
         }
+=======
+    // --- Dynamic Settings Update (WhatsApp Link Override) ---
+    if (typeof getSettings === 'function') {
+        const settings = getSettings();
+        document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+            const currentHref = link.getAttribute('href');
+            const newHref = currentHref.replace(/wa\.me\/\d+/, `wa.me/${settings.whatsapp}`);
+            link.setAttribute('href', newHref);
+        });
+>>>>>>> 69b8cd380999f87aa4806063b697fca386582298
     }
 });
 
