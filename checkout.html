@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صيدلية عزت | إتمام الطلب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { medical: { green: '#059669', dark: '#047857', light: '#ecfdf5' } } } } }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-medical-light text-medical-green p-2 rounded-lg">
+                    <i class="fa-solid fa-staff-snake text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 leading-none">صيدلية عزت</h1>
+                    <p class="text-sm text-gray-500">د. عزت فؤاد أبوسنان</p>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="bg-medical-green text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold mb-2"><i class="fa-solid fa-lock ml-3"></i>إتمام الطلب</h1>
+            <p class="text-green-100">أدخل بياناتك وسيتم توصيل طلبك في أقرب وقت</p>
+        </div>
+    </div>
+
+    <!-- Success State (hidden by default) -->
+    <div id="success-state" class="hidden flex-grow flex items-center justify-center py-20">
+        <div class="text-center">
+            <div class="w-28 h-28 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-circle-check text-6xl text-medical-green"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-3">تم استلام طلبك! 🎉</h2>
+            <p class="text-gray-600 mb-2">رقم الطلب: <span id="order-id-display" class="font-bold text-medical-green">#---</span></p>
+            <p class="text-gray-500 mb-8 max-w-sm mx-auto">سيتواصل معك فريقنا في أقرب وقت لتأكيد الطلب وتحديد موعد التوصيل.</p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <a href="my-orders.html" class="bg-medical-green text-white px-8 py-3 rounded-full font-bold hover:bg-medical-dark transition inline-flex items-center gap-2">
+                    <i class="fa-solid fa-list"></i> متابعة طلباتي
+                </a>
+                <a href="index.html" class="bg-white border border-medical-green text-medical-green px-8 py-3 rounded-full font-bold hover:bg-gray-50 transition">
+                    الرئيسية
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <main id="checkout-main" class="flex-grow py-10">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div id="login-required" class="hidden text-center py-16">
+                <i class="fa-solid fa-lock text-6xl text-gray-300 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">يجب تسجيل الدخول أولاً</h2>
+                <a href="login.html?redirect=checkout.html" class="bg-medical-green text-white px-8 py-3 rounded-full font-bold hover:bg-medical-dark transition">
+                    تسجيل الدخول
+                </a>
+            </div>
+            <div id="checkout-form-container" class="hidden grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+                <!-- Delivery Form -->
+                <div class="lg:col-span-3">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-medical-green"></i> بيانات التوصيل
+                        </h2>
+
+                        <div id="error-msg" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 mb-6 text-sm"></div>
+
+                        <form id="checkout-form" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">الاسم الكامل</label>
+                                <input id="name" type="text" readonly
+                                    class="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 text-gray-600 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">رقم الهاتف</label>
+                                <input id="phone" type="tel" readonly dir="ltr"
+                                    class="w-full px-4 py-3 border border-gray-100 rounded-xl bg-gray-50 text-gray-600 focus:outline-none text-left">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">عنوان التوصيل <span class="text-red-500">*</span></label>
+                                <textarea id="delivery_address" rows="3" placeholder="المحافظة – المركز – القرية – الشارع..."
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-medical-green transition resize-none" required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">ملاحظات إضافية <span class="text-gray-400 font-normal">(اختياري)</span></label>
+                                <textarea id="notes" rows="2" placeholder="أي تعليمات خاصة بالتوصيل..."
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-medical-green transition resize-none"></textarea>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                <p class="text-sm font-semibold text-gray-700 mb-3">طريقة الدفع</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-medical-green border-4 border-medical-green ring-2 ring-medical-light"></div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-money-bill-wave text-medical-green"></i>
+                                        <span class="font-medium">الدفع عند الاستلام (Cash on Delivery)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="submit-btn"
+                                class="w-full bg-medical-green text-white py-4 rounded-xl font-bold text-lg hover:bg-medical-dark transition shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-check-circle"></i> تأكيد الطلب
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
+                        <h2 class="text-xl font-bold text-gray-900 mb-5">ملخص طلبك</h2>
+                        <div id="order-items" class="space-y-3 mb-5 max-h-60 overflow-y-auto"></div>
+                        <div class="border-t border-gray-100 pt-4 space-y-2">
+                            <div class="flex justify-between text-gray-600 text-sm">
+                                <span>المجموع الفرعي</span>
+                                <span id="subtotal">0 جنيه</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600 text-sm">
+                                <span>التوصيل</span>
+                                <span class="text-medical-green">مجاني</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-lg text-gray-900 pt-2 border-t border-gray-100">
+                                <span>الإجمالي</span>
+                                <span id="total-price">0 جنيه</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('ezzat_cart') || '[]');
+        }
+
+        // Check auth
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        const cart = getCart();
+
+        if (!user) {
+            document.getElementById('login-required').classList.remove('hidden');
+        } else if (cart.length === 0) {
+            window.location.href = 'cart.html';
+        } else {
+            document.getElementById('checkout-form-container').classList.remove('hidden');
+
+            // Pre-fill user info
+            document.getElementById('name').value = user.name;
+            document.getElementById('phone').value = user.phone;
+
+            // Render order items
+            const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+            document.getElementById('subtotal').textContent = total.toLocaleString('ar-EG') + ' جنيه';
+            document.getElementById('total-price').textContent = total.toLocaleString('ar-EG') + ' جنيه';
+
+            const itemsEl = document.getElementById('order-items');
+            itemsEl.innerHTML = cart.map(item => `
+                <div class="flex justify-between items-center text-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-medical-light text-medical-green px-2 py-0.5 rounded text-xs font-bold">${item.quantity}×</span>
+                        <span class="text-gray-700 truncate max-w-[160px]">${item.name}</span>
+                    </div>
+                    <span class="font-semibold text-gray-900 flex-shrink-0">${(item.price * item.quantity).toLocaleString('ar-EG')} جنيه</span>
+                </div>
+            `).join('');
+
+            // Submit order
+            document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                const errorEl = document.getElementById('error-msg');
+                errorEl.classList.add('hidden');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جارٍ إرسال الطلب...';
+
+                try {
+                    const res = await fetch(`${API_BASE}/orders/checkout`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            delivery_address: document.getElementById('delivery_address').value.trim(),
+                            notes: document.getElementById('notes').value.trim(),
+                            items: cart.map(i => ({ product_id: i.id, quantity: i.quantity })),
+                        }),
+                    });
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        errorEl.textContent = data.error || 'حدث خطأ. يرجى المحاولة مجدداً.';
+                        errorEl.classList.remove('hidden');
+                    } else {
+                        // Clear cart and show success
+                        localStorage.removeItem('ezzat_cart');
+                        document.getElementById('checkout-main').classList.add('hidden');
+                        document.getElementById('order-id-display').textContent = '#' + data.order_id;
+                        document.getElementById('success-state').classList.remove('hidden');
+                        document.getElementById('success-state').classList.add('flex');
+                    }
+                } catch (err) {
+                    errorEl.textContent = 'تعذر الاتصال بالخادم.';
+                    errorEl.classList.remove('hidden');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> تأكيد الطلب';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

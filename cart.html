@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صيدلية عزت | سلة التسوق</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { medical: { green: '#059669', dark: '#047857', light: '#ecfdf5' } } } } }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-medical-light text-medical-green p-2 rounded-lg">
+                    <i class="fa-solid fa-staff-snake text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 leading-none">صيدلية عزت</h1>
+                    <p class="text-sm text-gray-500">د. عزت فؤاد أبوسنان</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a href="index.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الرئيسية</a>
+                <a href="products.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الأجهزة الطبية</a>
+                <a href="services.html" class="nav-link text-gray-600 hover:text-medical-green font-medium transition">الخدمات</a>
+                <a href="cart.html" class="relative text-medical-green font-bold transition">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-count" class="hidden absolute -top-2 -left-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">0</span>
+                </a>
+                <span id="auth-nav">
+                    <a href="login.html" class="bg-medical-green text-white px-4 py-2 rounded-full font-medium hover:bg-medical-dark transition text-sm">تسجيل الدخول</a>
+                </span>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-600 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 flex flex-col p-4 gap-4 shadow-lg absolute w-full">
+            <a href="index.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الرئيسية</a>
+            <a href="products.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">الأجهزة الطبية</a>
+            <a href="login.html" class="nav-link text-gray-700 hover:text-medical-green font-medium">تسجيل الدخول</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="bg-medical-green text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold mb-2"><i class="fa-solid fa-cart-shopping ml-3"></i>سلة التسوق</h1>
+            <p class="text-green-100">راجع طلبك قبل إتمام الشراء</p>
+        </div>
+    </div>
+
+    <!-- Cart Content -->
+    <main class="flex-grow py-10">
+        <div class="container mx-auto px-4 max-w-5xl">
+
+            <!-- Empty Cart State -->
+            <div id="empty-cart" class="hidden text-center py-24">
+                <i class="fa-solid fa-cart-shopping text-8xl text-gray-200 mb-6"></i>
+                <h2 class="text-2xl font-bold text-gray-700 mb-2">السلة فارغة</h2>
+                <p class="text-gray-500 mb-8">لم تضف أي منتجات بعد. ابدأ التسوق الآن!</p>
+                <a href="products.html" class="bg-medical-green text-white px-8 py-3 rounded-full font-bold hover:bg-medical-dark transition inline-flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-right"></i> تصفح الأجهزة الطبية
+                </a>
+            </div>
+
+            <!-- Cart Items + Summary -->
+            <div id="cart-content" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Items Column -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-gray-900">المنتجات (<span id="item-count">0</span>)</h2>
+                            <button onclick="clearCart()" class="text-red-500 hover:text-red-700 text-sm font-medium transition flex items-center gap-1">
+                                <i class="fa-solid fa-trash"></i> مسح الكل
+                            </button>
+                        </div>
+                        <div id="cart-items" class="divide-y divide-gray-50"></div>
+                    </div>
+                </div>
+
+                <!-- Summary Column -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">ملخص الطلب</h2>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-gray-600">
+                                <span>المجموع الفرعي</span>
+                                <span id="subtotal">0 جنيه</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>رسوم التوصيل</span>
+                                <span class="text-medical-green font-medium">مجاني</span>
+                            </div>
+                            <div class="border-t border-gray-100 pt-3 flex justify-between font-bold text-lg text-gray-900">
+                                <span>الإجمالي</span>
+                                <span id="total-price">0 جنيه</span>
+                            </div>
+                        </div>
+                        <a href="checkout.html" id="checkout-btn"
+                            class="block w-full bg-medical-green text-white py-3.5 rounded-xl font-bold text-center hover:bg-medical-dark transition shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-lock"></i> إتمام الطلب
+                        </a>
+                        <a href="products.html" class="block w-full text-center text-medical-green font-medium mt-4 hover:underline">
+                            متابعة التسوق
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">© 2026 صيدلية عزت. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // ─── Cart State ──────────────────────────────────────────────────────────
+        function getCart() {
+            return JSON.parse(localStorage.getItem('ezzat_cart') || '[]');
+        }
+        function saveCart(cart) {
+            localStorage.setItem('ezzat_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+        function updateCartBadge() {
+            const cart = getCart();
+            const count = cart.reduce((sum, i) => sum + i.quantity, 0);
+            const badge = document.getElementById('cart-count');
+            if (count > 0) {
+                badge.textContent = count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+        function clearCart() {
+            if (confirm('هل أنت متأكد من مسح السلة بالكامل؟')) {
+                saveCart([]);
+                renderCart();
+            }
+        }
+        function changeQuantity(productId, delta) {
+            const cart = getCart();
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                const idx = cart.indexOf(item);
+                cart.splice(idx, 1);
+            }
+            saveCart(cart);
+            renderCart();
+        }
+        function removeItem(productId) {
+            const cart = getCart().filter(i => i.id !== productId);
+            saveCart(cart);
+            renderCart();
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const emptyEl = document.getElementById('empty-cart');
+            const contentEl = document.getElementById('cart-content');
+            const itemsEl = document.getElementById('cart-items');
+
+            if (cart.length === 0) {
+                emptyEl.classList.remove('hidden');
+                contentEl.classList.add('hidden');
+                return;
+            }
+            emptyEl.classList.add('hidden');
+            contentEl.classList.remove('hidden');
+
+            const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+            document.getElementById('item-count').textContent = cart.length;
+            document.getElementById('subtotal').textContent = total.toLocaleString('ar-EG') + ' جنيه';
+            document.getElementById('total-price').textContent = total.toLocaleString('ar-EG') + ' جنيه';
+
+            itemsEl.innerHTML = cart.map(item => `
+                <div class="p-5 flex items-center gap-4 hover:bg-gray-50 transition">
+                    <div class="w-16 h-16 bg-medical-light rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="${item.icon || 'fa-solid fa-box-open'} text-2xl text-medical-green"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <h3 class="font-bold text-gray-900 truncate">${item.name}</h3>
+                        <p class="text-medical-green font-semibold">${item.price.toLocaleString('ar-EG')} جنيه</p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <button onclick="changeQuantity(${item.id}, -1)" class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition font-bold text-gray-700">−</button>
+                        <span class="w-8 text-center font-bold text-gray-900">${item.quantity}</span>
+                        <button onclick="changeQuantity(${item.id}, 1)" class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition font-bold text-gray-700">+</button>
+                    </div>
+                    <div class="flex-shrink-0 text-left">
+                        <p class="font-bold text-gray-900 mb-1">${(item.price * item.quantity).toLocaleString('ar-EG')} جنيه</p>
+                        <button onclick="removeItem(${item.id})" class="text-red-400 hover:text-red-600 text-sm transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        renderCart();
+        updateCartBadge();
+
+        // Auth nav update
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (user) {
+            document.getElementById('auth-nav').innerHTML = `
+                <a href="my-orders.html" class="text-gray-600 hover:text-medical-green font-medium transition ml-2">${user.name}</a>
+                <button onclick="logout()" class="text-gray-500 hover:text-red-500 text-sm transition"><i class="fa-solid fa-right-from-bracket"></i></button>
+            `;
+        }
+        async function logout() {
+            await fetch('http://localhost:3000/api/auth/logout', { method: 'POST', credentials: 'include' });
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

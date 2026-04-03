@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صيدلية عزت | لوحة التحكم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { medical: { green: '#059669', dark: '#047857', light: '#ecfdf5' } } } } }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+    <!-- Top Bar -->
+    <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-medical-light text-medical-green p-2 rounded-lg">
+                <i class="fa-solid fa-staff-snake text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-gray-900 leading-none">صيدلية عزت</h1>
+                <p class="text-xs text-gray-500">لوحة تحكم المدير</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../index.html" class="text-gray-500 hover:text-medical-green text-sm transition flex items-center gap-1">
+                <i class="fa-solid fa-house"></i> الموقع
+            </a>
+            <button onclick="logout()" class="text-red-400 hover:text-red-600 text-sm transition flex items-center gap-1">
+                <i class="fa-solid fa-right-from-bracket"></i> خروج
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex flex-col w-56 bg-white min-h-screen border-l border-gray-100 p-4 gap-1">
+            <button onclick="showTab('overview')" id="tab-overview" class="sidebar-btn active-tab w-full text-right px-4 py-2.5 rounded-xl font-medium transition flex items-center gap-3 text-medical-green bg-medical-light">
+                <i class="fa-solid fa-chart-pie w-5"></i> نظرة عامة
+            </button>
+            <button onclick="showTab('orders')" id="tab-orders" class="sidebar-btn w-full text-right px-4 py-2.5 rounded-xl font-medium transition flex items-center gap-3 text-gray-600 hover:text-medical-green hover:bg-gray-50">
+                <i class="fa-solid fa-list-ul w-5"></i> الطلبات
+            </button>
+            <button onclick="showTab('products')" id="tab-products" class="sidebar-btn w-full text-right px-4 py-2.5 rounded-xl font-medium transition flex items-center gap-3 text-gray-600 hover:text-medical-green hover:bg-gray-50">
+                <i class="fa-solid fa-box w-5"></i> المنتجات
+            </button>
+        </aside>
+
+        <!-- Mobile Tabs -->
+        <div class="md:hidden flex bg-white border-b border-gray-100 w-full overflow-x-auto">
+            <button onclick="showTab('overview')" class="sidebar-btn px-4 py-3 text-sm font-medium text-medical-green border-b-2 border-medical-green whitespace-nowrap">نظرة عامة</button>
+            <button onclick="showTab('orders')" class="sidebar-btn px-4 py-3 text-sm font-medium text-gray-500 whitespace-nowrap">الطلبات</button>
+            <button onclick="showTab('products')" class="sidebar-btn px-4 py-3 text-sm font-medium text-gray-500 whitespace-nowrap">المنتجات</button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow p-4 md:p-8">
+
+            <!-- Overview Tab -->
+            <div id="section-overview">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">نظرة عامة</h2>
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white rounded-2xl p-5 text-center medical-shadow">
+                        <i class="fa-solid fa-list-ul text-3xl text-blue-500 mb-3"></i>
+                        <div class="text-3xl font-bold text-gray-900" id="stat-total-orders">-</div>
+                        <p class="text-gray-500 text-sm mt-1">إجمالي الطلبات</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 text-center medical-shadow">
+                        <i class="fa-solid fa-clock text-3xl text-yellow-500 mb-3"></i>
+                        <div class="text-3xl font-bold text-gray-900" id="stat-pending">-</div>
+                        <p class="text-gray-500 text-sm mt-1">طلبات معلقة</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 text-center medical-shadow">
+                        <i class="fa-solid fa-money-bill-wave text-3xl text-medical-green mb-3"></i>
+                        <div class="text-2xl font-bold text-gray-900" id="stat-revenue">-</div>
+                        <p class="text-gray-500 text-sm mt-1">إجمالي الإيرادات</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 text-center medical-shadow">
+                        <i class="fa-solid fa-users text-3xl text-purple-500 mb-3"></i>
+                        <div class="text-3xl font-bold text-gray-900" id="stat-customers">-</div>
+                        <p class="text-gray-500 text-sm mt-1">العملاء المسجلين</p>
+                    </div>
+                </div>
+                <!-- Low Stock Alert -->
+                <div id="low-stock-section" class="hidden bg-white rounded-2xl p-6 medical-shadow">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-orange-500"></i> تحذير: منتجات قاربت على النفاد
+                    </h3>
+                    <div id="low-stock-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="section-orders" class="hidden">
+                <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+                    <h2 class="text-2xl font-bold text-gray-900">إدارة الطلبات</h2>
+                    <select id="order-status-filter" onchange="loadOrders()" class="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-medical-green">
+                        <option value="">جميع الطلبات</option>
+                        <option value="pending">معلق</option>
+                        <option value="confirmed">مؤكد</option>
+                        <option value="delivered">موصّل</option>
+                        <option value="cancelled">ملغي</option>
+                    </select>
+                </div>
+                <div id="orders-loading" class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-3xl text-medical-green"></i></div>
+                <div id="admin-orders-list" class="space-y-4"></div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="section-products" class="hidden">
+                <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+                    <h2 class="text-2xl font-bold text-gray-900">إدارة المنتجات</h2>
+                    <button onclick="openProductModal()" class="bg-medical-green text-white px-5 py-2.5 rounded-xl font-medium hover:bg-medical-dark transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> إضافة منتج
+                    </button>
+                </div>
+                <div id="products-loading" class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-3xl text-medical-green"></i></div>
+                <div id="admin-products-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900" id="modal-title">إضافة منتج جديد</h3>
+                <button onclick="closeProductModal()" class="text-gray-400 hover:text-gray-600 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm"></div>
+            <form id="product-form" class="space-y-4">
+                <input type="hidden" id="product-id">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم المنتج *</label>
+                    <input id="p-name" type="text" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">الوصف</label>
+                    <textarea id="p-desc" rows="3" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green resize-none"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">السعر (جنيه) *</label>
+                        <input id="p-price" type="number" min="0" step="0.01" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">المخزون *</label>
+                        <input id="p-stock" type="number" min="0" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">الفئة *</label>
+                    <select id="p-category" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green" required>
+                        <option value="">اختر الفئة</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">أيقونة Font Awesome</label>
+                    <input id="p-icon" type="text" placeholder="fa-solid fa-box-open" value="fa-solid fa-box-open" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-medical-green">
+                </div>
+                <button type="submit" id="modal-submit-btn" class="w-full bg-medical-green text-white py-3 rounded-xl font-bold hover:bg-medical-dark transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-save"></i> حفظ المنتج
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        const STATUS_LABELS = {
+            pending: { label: 'معلق', color: 'bg-yellow-100 text-yellow-800' },
+            confirmed: { label: 'مؤكد', color: 'bg-blue-100 text-blue-800' },
+            delivered: { label: 'موصّل', color: 'bg-green-100 text-green-800' },
+            cancelled: { label: 'ملغي', color: 'bg-red-100 text-red-800' },
+        };
+
+        // Check admin auth
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user || user.role !== 'admin') {
+            window.location.href = '../login.html';
+        }
+
+        // Tabs
+        function showTab(tab) {
+            ['overview', 'orders', 'products'].forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+                document.getElementById(`section-${t}`).classList.remove('flex');
+            });
+            document.getElementById(`section-${tab}`).classList.remove('hidden');
+            if (tab === 'orders') loadOrders();
+            if (tab === 'products') loadAdminProducts();
+            if (tab === 'overview') loadStats();
+        }
+
+        // Stats
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API_BASE}/admin/stats`, { credentials: 'include' });
+                const data = await res.json();
+                document.getElementById('stat-total-orders').textContent = data.totalOrders;
+                document.getElementById('stat-pending').textContent = data.pendingOrders;
+                document.getElementById('stat-revenue').textContent = data.totalRevenue.toLocaleString('ar-EG') + ' ج';
+                document.getElementById('stat-customers').textContent = data.totalCustomers;
+                if (data.lowStockProducts?.length) {
+                    document.getElementById('low-stock-section').classList.remove('hidden');
+                    document.getElementById('low-stock-list').innerHTML = data.lowStockProducts.map(p =>
+                        `<div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-700">${p.name}</span>
+                            <span class="font-bold text-orange-600 bg-orange-50 px-3 py-1 rounded-full">${p.stock} متبقي</span>
+                        </div>`
+                    ).join('');
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        // Orders
+        async function loadOrders() {
+            const status = document.getElementById('order-status-filter').value;
+            document.getElementById('orders-loading').classList.remove('hidden');
+            try {
+                const url = `${API_BASE}/admin/orders${status ? '?status=' + status : ''}`;
+                const res = await fetch(url, { credentials: 'include' });
+                const data = await res.json();
+                renderAdminOrders(data.orders || []);
+            } catch (err) { console.error(err); }
+            finally { document.getElementById('orders-loading').classList.add('hidden'); }
+        }
+
+        function renderAdminOrders(orders) {
+            const el = document.getElementById('admin-orders-list');
+            if (!orders.length) { el.innerHTML = '<p class="text-gray-400 text-center py-10">لا توجد طلبات</p>'; return; }
+            el.innerHTML = orders.map(o => {
+                const si = STATUS_LABELS[o.status] || STATUS_LABELS.pending;
+                return `<div class="bg-white rounded-2xl p-5 medical-shadow">
+                    <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+                        <div>
+                            <span class="font-bold text-gray-900">طلب #${o.id}</span>
+                            <span class="text-gray-400 text-sm mr-2">${new Date(o.created_at).toLocaleDateString('ar-EG')}</span>
+                            <div class="text-sm text-gray-600 mt-1">${o.customer_name} – ${o.customer_phone}</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${si.color}">${si.label}</span>
+                            <select onchange="updateOrderStatus(${o.id}, this.value)" class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-medical-green">
+                                <option value="">تغيير الحالة</option>
+                                <option value="confirmed">تأكيد</option>
+                                <option value="delivered">تسليم</option>
+                                <option value="cancelled">إلغاء</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1 border-t border-gray-50 pt-3">
+                        ${(o.items || []).map(i => `<div class="flex justify-between"><span>${i.quantity}× ${i.product_name}</span><span>${(i.price_at_time*i.quantity).toLocaleString('ar-EG')} جنيه</span></div>`).join('')}
+                        <div class="flex justify-between font-bold text-gray-900 mt-2 pt-2 border-t border-gray-50"><span>الإجمالي</span><span class="text-medical-green">${o.total.toLocaleString('ar-EG')} جنيه</span></div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        async function updateOrderStatus(id, status) {
+            if (!status) return;
+            try {
+                const res = await fetch(`${API_BASE}/admin/orders/${id}/status`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ status }),
+                });
+                if (res.ok) loadOrders();
+            } catch (err) { console.error(err); }
+        }
+
+        // Products
+        let adminCategories = [];
+        async function loadAdminProducts() {
+            document.getElementById('products-loading').classList.remove('hidden');
+            try {
+                const [prodsRes, catsRes] = await Promise.all([
+                    fetch(`${API_BASE}/admin/products`, { credentials: 'include' }),
+                    fetch(`${API_BASE}/categories`),
+                ]);
+                const prodsData = await prodsRes.json();
+                const catsData = await catsRes.json();
+                adminCategories = catsData.categories || [];
+                renderAdminProducts(prodsData.products || []);
+            } catch (err) { console.error(err); }
+            finally { document.getElementById('products-loading').classList.add('hidden'); }
+        }
+
+        function renderAdminProducts(products) {
+            const el = document.getElementById('admin-products-list');
+            if (!products.length) { el.innerHTML = '<p class="text-gray-400 text-center py-10 col-span-3">لا توجد منتجات</p>'; return; }
+            el.innerHTML = products.map(p => `
+                <div class="bg-white rounded-2xl p-5 medical-shadow flex flex-col gap-3 ${p.is_active ? '' : 'opacity-60'}">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-medical-light rounded-xl flex items-center justify-center">
+                                <i class="${p.image_icon || 'fa-solid fa-box'} text-xl text-medical-green"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 leading-tight">${p.name}</h3>
+                                <p class="text-xs text-gray-500">${p.category_name || 'بدون فئة'}</p>
+                            </div>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded-full ${p.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}">${p.is_active ? 'نشط' : 'مخفي'}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="font-bold text-medical-green text-lg">${p.price.toLocaleString('ar-EG')} جنيه</span>
+                        <span class="text-gray-500">مخزون: <span class="${p.stock <= 5 ? 'text-red-500 font-bold' : 'font-medium'}">${p.stock}</span></span>
+                    </div>
+                    <button onclick='openProductModal(${JSON.stringify(p)})' class="w-full text-center text-sm font-medium text-medical-green hover:bg-medical-light py-2 rounded-xl transition">
+                        <i class="fa-solid fa-pen-to-square ml-1"></i> تعديل
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openProductModal(product = null) {
+            const modal = document.getElementById('product-modal');
+            document.getElementById('modal-error').classList.add('hidden');
+            document.getElementById('modal-title').textContent = product ? 'تعديل المنتج' : 'إضافة منتج جديد';
+            document.getElementById('product-id').value = product?.id || '';
+            document.getElementById('p-name').value = product?.name || '';
+            document.getElementById('p-desc').value = product?.description || '';
+            document.getElementById('p-price').value = product?.price || '';
+            document.getElementById('p-stock').value = product?.stock ?? '';
+            document.getElementById('p-icon').value = product?.image_icon || 'fa-solid fa-box-open';
+
+            const catSelect = document.getElementById('p-category');
+            catSelect.innerHTML = '<option value="">اختر الفئة</option>' +
+                adminCategories.map(c => `<option value="${c.id}" ${product?.category_id == c.id ? 'selected' : ''}>${c.name}</option>`).join('');
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        document.getElementById('product-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value;
+            const btn = document.getElementById('modal-submit-btn');
+            const errEl = document.getElementById('modal-error');
+            errEl.classList.add('hidden');
+            btn.disabled = true;
+
+            const body = {
+                name: document.getElementById('p-name').value,
+                description: document.getElementById('p-desc').value,
+                price: parseFloat(document.getElementById('p-price').value),
+                stock: parseInt(document.getElementById('p-stock').value),
+                category_id: parseInt(document.getElementById('p-category').value),
+                image_icon: document.getElementById('p-icon').value,
+                is_active: 1,
+            };
+
+            try {
+                const res = await fetch(`${API_BASE}/admin/products${id ? '/' + id : ''}`, {
+                    method: id ? 'PUT' : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(body),
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    errEl.textContent = data.error;
+                    errEl.classList.remove('hidden');
+                } else {
+                    closeProductModal();
+                    loadAdminProducts();
+                }
+            } catch (err) {
+                errEl.textContent = 'تعذر الاتصال بالخادم.';
+                errEl.classList.remove('hidden');
+            } finally { btn.disabled = false; }
+        });
+
+        async function logout() {
+            await fetch(`${API_BASE}/auth/logout`, { method: 'POST', credentials: 'include' });
+            localStorage.removeItem('user');
+            window.location.href = '../index.html';
+        }
+
+        // Init
+        loadStats();
+    </script>
+</body>
+</html>
